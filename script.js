@@ -1,12 +1,10 @@
 const commands = {
-    'help': 'Available commands:\nhelp - Display this help message\nabout - Show about information\nprojects - List projects\ncontact - Show contact information\nlinkedin - Open LinkedIn profile\noneth - Open Oneth\'s portfolio\nkisal - Open Kisal\'s portfolio\nls - File system under development, use "help"\nclear - Clear the terminal',
+    'help': 'Available commands:\nhelp - Display this help message\nabout - Show about information\nprojects - List projects\ncontact - Show contact information\nlinkedin - Open LinkedIn profile\nclear - Clear the terminal',
+    'ls': 'File system under development, use "help"',
     'about': 'Hello! I\'m Charana, an Electrical Engineer with experience in various areas including industrial automation, circuit design, and renewable energy systems. I\'m passionate about leveraging technology to solve real-world problems.',
     'projects': 'Projects:\n1. Industrial Automation System\n2. Renewable Energy Solution\nMore details coming soon...',
     'contact': 'You can contact me via email at: randula@example.com (replace with actual email address)',
     'linkedin': 'Opening LinkedIn profile...',
-    'oneth': 'Opening Oneth\'s portfolio...',
-    'kisal': 'Opening Kisal\'s portfolio...',
-    'ls': 'File system under development, use "help"',
     'clear': 'clear',
 };
 
@@ -20,12 +18,6 @@ function handleCommand(input) {
         } else if (command === 'linkedin') {
             outputElement.innerHTML += `randula@portfolio:~$ ${command}\n${commands[command]}\n`;
             window.open('https://www.linkedin.com/in/randall-charana/', '_blank');
-        } else if (command === 'oneth') {
-            outputElement.innerHTML += `randula@portfolio:~$ ${command}\n${commands[command]}\n`;
-            window.open('https://onethk.github.io/onethportfolio/', '_blank');
-        } else if (command === 'kisal') {
-            outputElement.innerHTML += `randula@portfolio:~$ ${command}\n${commands[command]}\n`;
-            window.open('https://www.linkedin.com/in/kisal-fernando-0a2a5120a/', '_blank');
         } else {
             outputElement.innerHTML += `randula@portfolio:~$ ${command}\n${commands[command]}\n`;
         }
@@ -41,5 +33,23 @@ document.getElementById('input').addEventListener('keydown', function(event) {
         const input = event.target.value;
         handleCommand(input);
         event.target.value = '';
+    }
+});
+
+window.addEventListener('scroll', () => {
+    const computer = document.getElementById('computer');
+    const projects = document.getElementById('projects');
+    const scrollY = window.scrollY;
+    const maxScroll = window.innerHeight / 2;
+
+    if (scrollY < maxScroll) {
+        const rotation = (scrollY / maxScroll) * 10;
+        const opacity = 1 - (scrollY / maxScroll);
+        computer.style.transform = `rotateX(${rotation}deg)`;
+        computer.style.opacity = `${opacity}`;
+    } else {
+        computer.style.transform = `rotateX(10deg)`;
+        computer.style.opacity = `0`;
+        projects.style.opacity = `1`;
     }
 });
